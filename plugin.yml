@@ -1,0 +1,13 @@
+name: ImageDisplays
+author: RedstoneTek
+description: A plugin to convert png images to banners made of item frames and maps
+
+version: 1.0
+api-version: 1.14
+main: com.tek.idisplays.Main
+load: startup
+
+commands:
+  imagedisplays:
+    aliases: [imagedisplay, idisplays, idisplay, displays, display]
+    description: Creates a custom display
