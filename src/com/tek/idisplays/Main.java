@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.tek.idisplays.async.MapCreationManager;
 import com.tek.idisplays.listeners.InteractListener;
 import com.tek.idisplays.listeners.ItemFrameListener;
 import com.tek.idisplays.listeners.MovementListener;
@@ -22,6 +23,7 @@ public class Main extends JavaPlugin {
 	private Map<UUID, Selection> selections;
 	private List<UUID> deletions;
 	private MapManager mapManager;
+	private MapCreationManager mapCreationManager;
 	
 	@Override
 	public void onEnable() {
@@ -29,6 +31,7 @@ public class Main extends JavaPlugin {
 		selections = new HashMap<UUID, Selection>();
 		deletions = new ArrayList<UUID>();
 		mapManager = new MapManager();
+		mapCreationManager = new MapCreationManager();
 		
 		Reference.init();
 		mapManager.getMapCache().addAll(mapManager.readCache());
@@ -43,6 +46,7 @@ public class Main extends JavaPlugin {
 		
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new WandCheckingTask(), 0, 20);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new SelectionHighlightTask(), 0, 5);
+		getServer().getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), mapCreationManager, 0, 4);
 	}
 	
 	@Override
@@ -64,6 +68,10 @@ public class Main extends JavaPlugin {
 	
 	public MapManager getMapManager() {
 		return mapManager;
+	}
+	
+	public MapCreationManager getMapCreationManager() {
+		return mapCreationManager;
 	}
 	
 }

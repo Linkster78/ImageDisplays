@@ -39,7 +39,7 @@ public class MovementListener implements Listener {
 		if(Main.getInstance().getSelections().containsKey(event.getPlayer().getUniqueId())) {
 			Selection selection = Main.getInstance().getSelections().get(event.getPlayer().getUniqueId());
 			if(selection.getFrom() != null) {
-				if(selection.getFrom().getLocation().distance(event.getPlayer().getLocation()) >= 64) {
+				if(selection.getFrom().getLocation().distance(event.getPlayer().getLocation()) >= 128) {
 					Main.getInstance().getSelections().remove(event.getPlayer().getUniqueId());
 					event.getPlayer().sendMessage(Reference.PREFIX + Reference.color("&cCancelled display creation (Too Large)"));
 				}

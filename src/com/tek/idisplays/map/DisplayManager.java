@@ -28,6 +28,7 @@ import org.bukkit.map.MapView;
 import com.tek.idisplays.Main;
 import com.tek.idisplays.Reference;
 import com.tek.idisplays.Selection;
+import com.tek.idisplays.async.MapCreation;
 
 public class DisplayManager extends MapRenderer {
 	
@@ -92,11 +93,7 @@ public class DisplayManager extends MapRenderer {
 								ItemStack map = maps[mapIndex];
 								mapIndex++;
 								
-								ItemFrame frame = (ItemFrame) blockAt.getWorld().spawn(blockAt.getLocation(), ItemFrame.class, f -> {
-									f.setFacingDirection(selection.getFace());
-								});
-								
-								frame.setItem(map);
+								Main.getInstance().getMapCreationManager().queue(new MapCreation(blockAt, selection.getFace(), map));
 							}
 						}
 					}
@@ -107,11 +104,7 @@ public class DisplayManager extends MapRenderer {
 								ItemStack map = maps[mapIndex];
 								mapIndex++;
 								
-								ItemFrame frame = (ItemFrame) blockAt.getWorld().spawn(blockAt.getLocation(), ItemFrame.class, f -> {
-									f.setFacingDirection(selection.getFace());
-								});
-								
-								frame.setItem(map);
+								Main.getInstance().getMapCreationManager().queue(new MapCreation(blockAt, selection.getFace(), map));
 							}
 						}
 					}
@@ -122,11 +115,7 @@ public class DisplayManager extends MapRenderer {
 								ItemStack map = maps[mapIndex];
 								mapIndex++;
 								
-								ItemFrame frame = (ItemFrame) blockAt.getWorld().spawn(blockAt.getLocation(), ItemFrame.class, f -> {
-									f.setFacingDirection(selection.getFace());
-								});
-								
-								frame.setItem(map);
+								Main.getInstance().getMapCreationManager().queue(new MapCreation(blockAt, selection.getFace(), map));
 							}
 						}
 					}
@@ -137,11 +126,7 @@ public class DisplayManager extends MapRenderer {
 								ItemStack map = maps[mapIndex];
 								mapIndex++;
 								
-								ItemFrame frame = (ItemFrame) blockAt.getWorld().spawn(blockAt.getLocation(), ItemFrame.class, f -> {
-									f.setFacingDirection(selection.getFace());
-								});
-								
-								frame.setItem(map);
+								Main.getInstance().getMapCreationManager().queue(new MapCreation(blockAt, selection.getFace(), map));
 							}
 						}
 					}
