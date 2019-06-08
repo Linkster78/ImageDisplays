@@ -69,7 +69,7 @@ public class ImageDisplayCommand implements CommandExecutor {
 			else if(args[0].equalsIgnoreCase("help")) {
 				if(args.length == 1) {
 					sender.sendMessage(Reference.color("&a&lImage&2Displays &6Help Menu"));
-					sender.sendMessage(Reference.color("&8- &a/imagedisplays create <file> &8- &aCreates a display according to your selection"));
+					sender.sendMessage(Reference.color("&8- &a/imagedisplays create <file/url> &8- &aCreates a display according to your selection"));
 					sender.sendMessage(Reference.color("&8- &a/imagedisplays remove &8- &aPuts you in deletion mode (Hit a display to remove it)"));
 					sender.sendMessage(Reference.color("&8- &a/imagedisplays help &8- &aProvides the help menu of the plugin"));
 				} else {

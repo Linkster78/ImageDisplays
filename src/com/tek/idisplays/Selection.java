@@ -1,6 +1,9 @@
 package com.tek.idisplays;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -53,7 +56,38 @@ public class Selection {
 	}
 	
 	public boolean imageExists() {
-		return getImageFile().exists();
+		if(!isURL()) {
+			return getImageFile().exists();
+		} else {
+			if(getCode() != 404) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public boolean isURL() {
+		try {
+			new URL(imageName);
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
+	}
+	
+	private int getCode() {
+		HttpURLConnection huc;
+		try {
+			URL url = new URL(imageName);
+			huc = (HttpURLConnection) url.openConnection();
+			huc.setRequestMethod("GET");
+			huc.connect(); 
+			int code = huc.getResponseCode();
+			return code;
+		} catch (IOException e) {
+			return 404;
+		} 
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +37,12 @@ public class DisplayManager extends MapRenderer {
 		Main.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
 			if(selection.imageExists()) {
 				try {
-					BufferedImage image = ImageIO.read(selection.getImageFile());
+					BufferedImage image;
+					if(selection.isURL()) {
+						image = ImageIO.read(new URL(selection.getImageName()));
+					} else {
+						image = ImageIO.read(selection.getImageFile());
+					}
 					
 					int mapWidth = 0;
 					int mapHeight = 0;
