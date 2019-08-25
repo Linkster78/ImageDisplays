@@ -12,8 +12,8 @@ import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.inventory.meta.MapMeta;
 
 import com.tek.idisplays.Main;
-import com.tek.idisplays.map.DisplayManager;
 import com.tek.idisplays.map.CachedMap;
+import com.tek.idisplays.map.DisplayManager;
 
 public class ItemFrameListener implements Listener {
 	
@@ -58,7 +58,7 @@ public class ItemFrameListener implements Listener {
 						MapMeta meta = (MapMeta) f.getItem().getItemMeta();
 						Optional<CachedMap> mapCached = Main.getInstance().getMapManager().getMapCache(meta.getMapId());
 						if(mapCached.isPresent()) {
-							Main.getInstance().getMapManager().getMapCache().remove(mapCached.get());
+							event.setCancelled(true);
 						}
 					}
 				}

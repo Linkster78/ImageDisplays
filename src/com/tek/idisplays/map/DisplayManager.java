@@ -2,6 +2,7 @@ package com.tek.idisplays.map;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -188,15 +189,16 @@ public class DisplayManager extends MapRenderer {
 		});
 	}
 	
-	private static BufferedImage resize(BufferedImage img, int newW, int newH) { 
-	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+	private static BufferedImage resize(BufferedImage img, double newW, double newH) { 
+	    BufferedImage dbi = null;
+	    if(img != null) {
+	    	dbi = new BufferedImage((int)newW, (int)newH, img.getType());
+	    	Graphics2D g = dbi.createGraphics();
+	    	AffineTransform at = AffineTransform.getScaleInstance(newW / (double)img.getWidth(), newH / (double)img.getHeight());
+	    	g.drawRenderedImage(img, at);
+	    }
 
-	    Graphics2D g2d = dimg.createGraphics();
-	    g2d.drawImage(tmp, 0, 0, null);
-	    g2d.dispose();
-
-	    return dimg;
+	    return dbi;
 	}
 	
 	private boolean drawn;
