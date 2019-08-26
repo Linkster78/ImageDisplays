@@ -1,8 +1,6 @@
 package com.tek.idisplays.map;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +28,8 @@ import com.tek.idisplays.Main;
 import com.tek.idisplays.Reference;
 import com.tek.idisplays.Selection;
 import com.tek.idisplays.async.MapCreation;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 public class DisplayManager extends MapRenderer {
 	
@@ -59,7 +59,9 @@ public class DisplayManager extends MapRenderer {
 					int width = mapWidth * MAP_SIZE;
 					int height = mapHeight * MAP_SIZE;
 					
-					image = resize(image, width, height);
+					image = Thumbnails.of(image)
+							.size(width, height)
+							.asBufferedImage();
 					
 					ItemStack[] maps = new ItemStack[mapWidth * mapHeight];
 					for(int mapX = 0; mapX < mapWidth; mapX++) {
@@ -187,18 +189,6 @@ public class DisplayManager extends MapRenderer {
 			long now = System.currentTimeMillis();
 			p.sendMessage(Reference.PREFIX + Reference.color("&aSuccess! Deleted &6" + forRemoval.size() + " &aitem frames, took &6" + (now - start) + "&ams"));
 		});
-	}
-	
-	private static BufferedImage resize(BufferedImage img, double newW, double newH) { 
-	    BufferedImage dbi = null;
-	    if(img != null) {
-	    	dbi = new BufferedImage((int)newW, (int)newH, img.getType());
-	    	Graphics2D g = dbi.createGraphics();
-	    	AffineTransform at = AffineTransform.getScaleInstance(newW / (double)img.getWidth(), newH / (double)img.getHeight());
-	    	g.drawRenderedImage(img, at);
-	    }
-
-	    return dbi;
 	}
 	
 	private boolean drawn;

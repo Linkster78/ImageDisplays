@@ -51,7 +51,7 @@ public class ItemFrameListener implements Listener {
 							MapMeta meta = (MapMeta) f.getItem().getItemMeta();
 							Optional<CachedMap> mapCached = Main.getInstance().getMapManager().getMapCache(meta.getMapId());
 							if(mapCached.isPresent()) {
-								Main.getInstance().getMapManager().getMapCache().remove(mapCached.get());
+								event.setCancelled(true);
 							}
 						}
 					} else {
